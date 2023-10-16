@@ -2,7 +2,7 @@
  # @Author: Vincent Young
  # @Date: 2023-10-16 00:54:45
  # @LastEditors: Vincent Young
- # @LastEditTime: 2023-10-16 00:55:12
+ # @LastEditTime: 2023-10-16 01:37:08
  # @FilePath: /AmazonPriceTracker/.cross_compile.sh
  # @Telegram: https://t.me/missuo
  # 
@@ -12,7 +12,7 @@ set -e
 DIST_PREFIX="AmazonPriceTracker"
 DEBUG_MODE=${2}
 TARGET_DIR="dist"
-PLATFORMS="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64"
+PLATFORMS="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/386 windows/amd64"
 
 rm -rf ${TARGET_DIR}
 mkdir ${TARGET_DIR}
