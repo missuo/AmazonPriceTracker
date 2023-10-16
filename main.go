@@ -12,6 +12,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"regexp"
 	"strings"
@@ -87,6 +88,7 @@ func getProductId(link string) string {
 }
 
 func main() {
+	fmt.Println("Amazon Price Tracking is running...")
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
