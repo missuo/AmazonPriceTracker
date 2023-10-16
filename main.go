@@ -2,7 +2,7 @@
  * @Author: Vincent Young
  * @Date: 2023-10-15 22:53:26
  * @LastEditors: Vincent Young
- * @LastEditTime: 2023-10-16 01:17:34
+ * @LastEditTime: 2023-10-16 02:07:01
  * @FilePath: /AmazonPriceTracker/main.go
  * @Telegram: https://t.me/missuo
  *
@@ -12,7 +12,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"regexp"
 	"strings"
@@ -107,9 +106,15 @@ func main() {
 		if productId != "" {
 			productLink := "https://www.amazon.com/dp/" + productId
 			product := pricer(productLink)
-			fmt.Println(productLink)
-			fmt.Println(product)
-			c.JSON(http.StatusOK, product)
+			// fmt.Println(product["product_title"])
+			if product["product_title"] == "" {
+				c.JSON(http.StatusTooManyRequests, gin.H{
+					"code":    http.StatusTooManyRequests,
+					"message": "Too Many Requests",
+				})
+			} else {
+				c.JSON(http.StatusOK, product)
+			}
 		} else {
 			c.JSON(http.StatusNotFound, gin.H{
 				"code":    http.StatusNotFound,
