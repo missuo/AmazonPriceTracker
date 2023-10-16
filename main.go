@@ -2,7 +2,7 @@
  * @Author: Vincent Young
  * @Date: 2023-10-15 22:53:26
  * @LastEditors: Vincent Young
- * @LastEditTime: 2023-10-16 00:56:57
+ * @LastEditTime: 2023-10-16 01:17:34
  * @FilePath: /AmazonPriceTracker/main.go
  * @Telegram: https://t.me/missuo
  *
@@ -25,6 +25,7 @@ func pricer(productLink string) map[string]interface{} {
 	var newPrice string
 	var productTitle string
 	var usedPrice string
+	var savingsPercentage string
 	productDetail := make(map[string]interface{})
 
 	c := colly.NewCollector(
@@ -33,6 +34,7 @@ func pricer(productLink string) map[string]interface{} {
 
 	var callbackTriggeredTitle bool
 	var callbackTriggeredPrice bool
+	var callbackTriggeredPercentage bool
 
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36")
@@ -43,6 +45,13 @@ func pricer(productLink string) map[string]interface{} {
 			productTitle = e.Text
 			productTitle = strings.TrimSpace(productTitle)
 			callbackTriggeredTitle = true
+		}
+	})
+
+	c.OnHTML("#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center > span.a-size-large.a-color-price.savingPriceOverride.aok-align-center.reinventPriceSavingsPercentageMargin.savingsPercentage", func(e *colly.HTMLElement) {
+		if !callbackTriggeredPercentage {
+			savingsPercentage = e.Text
+			callbackTriggeredPercentage = true
 		}
 	})
 
@@ -65,6 +74,7 @@ func pricer(productLink string) map[string]interface{} {
 	productDetail["product_link"] = productLink
 	productDetail["new_price"] = newPrice
 	productDetail["used_price"] = usedPrice
+	productDetail["savings_percentage"] = savingsPercentage
 	return productDetail
 }
 
