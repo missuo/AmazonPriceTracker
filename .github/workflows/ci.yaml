@@ -9,7 +9,7 @@ on:
 
 env:
   # github.repository as <account>/<repo>
-  DOCKER_IMAGE_NAME: missuo/deeplx
+  DOCKER_IMAGE_NAME: missuo/amzn-price-tracker
   GHCR_IMAGE_NAME: ${{ github.repository }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
