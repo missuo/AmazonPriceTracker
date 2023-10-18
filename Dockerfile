@@ -5,7 +5,7 @@ COPY main.go ./
 COPY go.mod ./
 COPY go.sum ./
 RUN go get -d -v ./
-RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o deeplx .
+RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o amazonpricetracker .
 
 FROM alpine:latest
 WORKDIR /app
