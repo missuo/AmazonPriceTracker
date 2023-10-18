@@ -9,5 +9,5 @@ RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o deeplx .
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /go/src/github.com/missuo/AmazonPriceTracker/amznpt /app/amznpt
-CMD ["/app/amznpt"]
+COPY --from=builder /go/src/github.com/missuo/AmazonPriceTracker/amazonpricetracker /app/amazonpricetracker
+CMD ["/app/amazonpricetracker"]
