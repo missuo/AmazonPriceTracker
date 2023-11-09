@@ -2,7 +2,7 @@
  * @Author: Vincent Young
  * @Date: 2023-10-15 22:53:26
  * @LastEditors: Vincent Young
- * @LastEditTime: 2023-10-16 02:07:01
+ * @LastEditTime: 2023-11-08 22:29:02
  * @FilePath: /AmazonPriceTracker/main.go
  * @Telegram: https://t.me/missuo
  *
@@ -93,8 +93,8 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"code":    200,
+		c.JSON(http.StatusOK, gin.H{
+			"code":    http.StatusOK,
 			"message": "Welcome to Amazon Price Tracker. Made by Vincent.",
 		})
 	})
