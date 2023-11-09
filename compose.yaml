@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  amznpt:
+    image: ghcr.io/missuo/amazonpricetracker:latest
+    restart: always
+    ports:
+      - "7777:7777"
